@@ -1,4 +1,6 @@
-
+{% extends 'base.html' %}
+{% block title%}{% endblock%}
+{% block content%}
 <head>
 	<!-- Font Awesome -->
 	<link
@@ -36,7 +38,29 @@
 		<div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
 		  <form method ='POST'>
 			{% csrf_token %}
-			{{form}}
+			<div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+			  <p class="lead fw-normal mb-0 me-3">Sign in</p>
+			</div>
+			<div class="divider d-flex align-items-center my-4">
+			</div>
+			<div class="form-outline mb-4">
+				{{form.email}}
+			  <label class="form-label" for="form3Example3">Email address</label>
+			</div>
+  
+			<!-- Password input -->
+			<div class="form-outline mb-3">
+				{{form.password}}
+			  <label class="form-label" for="form3Example4">Password</label>
+			</div>
+  
+			<div class="d-flex justify-content-between align-items-center">
+			  <!-- Checkbox -->
+			  <div class="form-check mb-0">
+			
+			  </div>
+			</div>
+  
 			<div class="text-center text-lg-start mt-4 pt-2">
 			  <button type="submit" class="btn btn-primary btn-lg"
 				style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
@@ -53,7 +77,6 @@
 	  class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
 	  <!-- Copyright -->
 	  <div class="text-white mb-3 mb-md-0">
-		Copyright © 2020. All rights reserved.
 	  </div>
 	  <!-- Copyright -->
   
@@ -75,3 +98,4 @@
 	  <!-- Right -->
 	</div>
   </section>
+{% endblock%}
