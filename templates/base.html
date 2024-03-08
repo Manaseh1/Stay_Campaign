@@ -34,8 +34,13 @@
 	rel="stylesheet"
 	/>
 </head>
-
+<header>
+	{% if user.is_authenticated %}
+    {% include 'navbar.html' %}
+	{% endif %}
+</header>
 {%block content%}
+
 
 {%endblock content%}
 <!-- script from adminlte-->

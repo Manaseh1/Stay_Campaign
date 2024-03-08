@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+{%block title%}Landing page{%endblock%}
+{%block content%}
+<html>
+    
+    <body>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+            <a class="navbar-brand display-1" href="#"> StayCampaign</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+      
+            <div class="collapse navbar-collapse" id="navbarsExample03" style =' float: right;'>
+            </div>
+            <ul class="navbar-nav " >
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{%url 'signup' %}">Sign up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{%url 'login'%}">Sign in</a>
+                </li>
+      
+          </nav>
+          
+        </header>
+        
+        <section class = 'welcome text-center p-3 inner cover'>
+            <div><h2 class = 'display-1 p-4 mt-1 '>Welcome</h2></div>
+            <p class = 'display-5'>Welcome to Stay Campaign where. This is where at your own comfort zone during election times, you can easily access detailed information on your candidates</p>
+            <div>
+                <button class="btn btn-lg btn-primary" style="font-size: 20px; padding: 20px 40px;">Sign up</button>
+            </div>
+            
+        </section>
+        
+        <footer class="footer navbar-dark pb-1 bg-dark fixed-bottom">
+            <div class="container p-3">
+                <p class="text-center text-white lead h4 ">By Manaseh Njoroge</p>
+            </div>
+        </footer>
+    </body>
+</html>
+{%endblock content%}

@@ -15,11 +15,11 @@
 				<form method="POST">
 					{% csrf_token %}
 					{% if messages %}
-						<ul class="messages">
+						<div class="messages mb-3 col-10">
 							{% for message in messages %}
-								<li{% if message.tags %} class="alert {{ message.tags }}"{% endif %}>{{ message }}</li>
+								<div style ="list-style-type: none;"{% if message.tags %} class="alert {{ message.tags }} "{% endif %}>{{ message }}</div>
 							{% endfor %}
-						</ul>
+						</div>
 					{% endif %}
 					
 					<div class="mb-4">

@@ -52,3 +52,5 @@ def signin(request):
     }           
     return render(request, 'login.html',context)
 
+def landing(request):
+    return render(request,'landing.html')
