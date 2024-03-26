@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-{% include "navbar.html" %}
 <section style="background-color: #eee;" class='p-4'>
   <div class="row">
     <div class="col-lg-4">
@@ -23,9 +22,10 @@
             <p class="mb-0 display-4">About me</p>
             <hr>
           </div>
-          {% lorem 1 b random %}
+     
+          
           <div class='text-center'>
-            <button class="btn btn-primary">edit</button>
+            <a href ="{% url 'create_profile' %}" class="btn btn-primary">edit</a>
           </div>
         </div>
       </div>
@@ -36,7 +36,6 @@
           <p class="mb-0 display-4">Manifesto</p>
           <hr>
         </div>
-        {% lorem 1 b random %}
         <div class='text-center'>
           <button class="btn btn-primary">edit</button>
         </div>
@@ -46,9 +45,9 @@
           <p class="mb-0 display-4">Agenda</p>
           <hr>
         </div>
-        {% lorem 1 b random %}
         <div class='text-center'>
           <button class="btn btn-primary">edit</button>
+          
         </div>
       </div>
     </div>

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+
+<div class = 'mt-5 p-5 border rounded container text-align-center display-flex justify-content-center'>
+	<h2>Edit profile</h2>
+	<form  method="POST"   enctype='multipart/form-data' novalidate>
+	{% csrf_token %}
+	{{form.user.as_hidden}}
+	{{form.image|attr:'class:form-control mb-2'|add_class:'mb-2'}}
+	{{form.about_me|attr:'class:form-control'|add_class:'mb-2'|attr:'placeholder:Tell us about yourself ' }}
+	<input class = "btn btn-secondary mt-3 	pt-3"type="submit" value="Save" />
+</form>
+
+</div>
+
+{% endblock content %}

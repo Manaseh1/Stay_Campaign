@@ -1,9 +1,17 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+
 
 class LoginForm(forms.Form):
-    email =  forms.EmailField( required=False)
+    username =  forms.CharField(required=True)
     password = forms.CharField(widget=forms.PasswordInput)
+
+ 
+
+# class LoginForm(forms.Form):
+#     username =  forms.CharField( required=True)
+#     password = forms.CharField(widget=forms.PasswordInput)
 
 class SignupForm(forms.ModelForm):
     email = forms.EmailField(max_length=254, help_text='Required. Enter a valid email address.')
