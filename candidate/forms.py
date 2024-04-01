@@ -10,3 +10,8 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = '__all__'
+
+class CreateMangender(forms.ModelForm):
+    class Meta:
+        model = Mangender
+        fields = '__all__'

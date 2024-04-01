@@ -10,6 +10,7 @@ class Profile(models.Model):
         return self.user.username
 
 class Mangender(models.Model):
+    user = models.OneToOneField(User,on_delete = models.CASCADE,null=True)
     profile = models.OneToOneField(Profile, on_delete = models.CASCADE,null=True)
     title = models.CharField(max_length = 255, blank = True)
     manifesto = models.TextField(blank = True)

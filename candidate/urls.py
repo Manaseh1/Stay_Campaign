@@ -4,5 +4,5 @@ urlpatterns = [
     path('',candidate_profile,name = 'profile'),
     path('create/',create_profile,name = 'create_profile'),
     path('edit/',edit_profile,name = 'edit_profile'),
-    
+    path('mangender/',create_mangender,name='create_mangender'),
 ]
