@@ -3,7 +3,10 @@ from .models import *
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import *
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import logout
+from django.contrib.auth.models import AnonymousUser
+
 
 # Create your views here.
 # def create(request):
@@ -72,7 +75,36 @@ def create_mangender(request):
     context = {'form': form}
     return render(request, 'mangenda.html', context)
 
-                  
+class CustomAnonymousUser:
+    def __init__(self, username='AnonymousUser'):
+        self.username = username
+
 def candidate_profile(request):
-    # profile = get_object_or_404(Profile,pk=request.user.pk)
-    return render(request,'candidate_profile.html')
+    if request.user.is_authenticated:
+        user = request.user
+    else:
+        user = CustomAnonymousUser()
+
+    return render(request, 'candidate_profile.html', {'user': user})               
+# def candidate_profile(request):
+#     if request.user.is_authenticated():
+#         user = request.user
+#         return render(request,'candidate_profile.html'),{'user': user}
+#     else :
+#         someone = AnonymousUser()
+#         return render(request,'candidate_profile.html',{'someone':someone})    
+#     # profile = get_object_or_404(Profile,pk=request.user.pk)
+#     # return render(request,'candidate_profile.html')
+
+def create_comment(request):
+    return render(request ,'comments.html')
+
+# Remember not to use keywords
+def my_logout(request):
+    user = request.user
+    if user.is_authenticated:
+        logout(request)
+        return redirect('profile')
+    else:
+        return HttpResponse('not sure')
+    

@@ -3,14 +3,14 @@
 
 {%block content%}
 <div class = 'mt-5 p-5 border rounded container text-align-center display-flex justify-content-center'>
-	<h2></h2>
+	<h2>Create/Edit your Manifesto and agenda</h2>
 	<form  method="POST"   novalidate>
     {% csrf_token %}
     
 	{{form.profile.as_hidden}}
 	{{form.user.as_hidden}}
-	{{form.title|attr:'class:form-control mb-2'|add_class:'mb-2'}}
-	{{form.manifesto|attr:'class:form-control'|add_class:'mb-2'|attr:'placeholder: Manifest your manifesto hehe ' }}
+	{{form.title|attr:'class:form-control mb-3'|add_class:'mb-2'|attr:'placeholder: Title'}}
+	{{form.manifesto|attr:'class:form-control mb-3'|add_class:'mb-2'|attr:'placeholder: Manifest your manifesto hehe ' }}
 	{{form.agenda|attr:'class:form-control'|add_class:'mb-2'|attr:'placeholder: Break down your points in pointform ' }}
 
 	<input class = "btn btn-secondary mt-3 	pt-3"type="submit" value="Save" />

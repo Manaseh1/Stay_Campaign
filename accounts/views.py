@@ -6,7 +6,7 @@ from django.contrib import messages
 from .forms import *
 from .models import *
 # Create your views here
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AnonymousUser
 from django.contrib import messages
 from django.shortcuts import render
 from .forms import SignupForm

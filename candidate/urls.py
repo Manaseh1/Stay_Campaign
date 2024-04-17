@@ -5,4 +5,6 @@ urlpatterns = [
     path('create/',create_profile,name = 'create_profile'),
     path('edit/',edit_profile,name = 'edit_profile'),
     path('mangender/',create_mangender,name='create_mangender'),
+    path('comments/',create_comment,name='create_comment'),
+    path('my_logout/', my_logout, name='logout'), #dont use keywords to name paths
 ]

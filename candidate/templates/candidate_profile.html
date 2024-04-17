@@ -8,7 +8,13 @@
           <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
             class="rounded-circle img-fluid" style="width: 150px;">
           <h5 class="my-3"></h5>
-          <p class="text-muted mb-1">Candidate Post</p>
+          <p class="text-muted mb-1">
+            {%if is_authenticated%}
+              Welcome {{user.username}}
+            {%else%}
+              Currently you are {{user.username}}
+            {%endif%}
+          </p>
           <p class="text-muted mb-4"></p>
           <div class="d-flex justify-content-center mb-2">
             <button type="button" class="btn btn-primary">Follow</button>

@@ -37,6 +37,8 @@
 <header>
 	{% if user.is_authenticated %}
     {% include 'navbar.html' %}
+	{%else %}
+	{% include 'navbar2.html' %}
 	{% endif %}
 </header>
 {%block content%}
