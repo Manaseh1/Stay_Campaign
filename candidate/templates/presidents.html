@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div>
+    <h1 class = 'text-center'>Presidential aspirants</h1>
+</div>    
+
+<div class="container">
+    <div class='row justify-content-center'>
+        {% for president in presidents %}
+        <div class='col'>
+            <div class="card" style="width: 18rem; transition: transform 0.3s, box-shadow 0.3s;">
+                <img class="thumbnail card-img-top" src="{% static 'img/president.png' %}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ president.user.first_name }}</h5>
+                    <p class="card-text">{{ president.about_me }}</p>
+                    <a href="{% url 'president_detail' president.id %}" class="btn btn-primary">Know more</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{%endblock%}

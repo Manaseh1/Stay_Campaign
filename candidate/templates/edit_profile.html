@@ -9,6 +9,7 @@
 	<form  method="POST"   enctype='multipart/form-data' novalidate>
 	{% csrf_token %}
 	{{form.user.as_hidden}}
+	{{form.dockets.as_hidden}}
 	{{form.image|attr:'class:form-control mb-2'|add_class:'mb-2'}}
 	{{form.about_me|attr:'class:form-control'|add_class:'mb-2'|attr:'placeholder:Tell us about yourself ' }}
 	<input class = "btn btn-secondary mt-3 	pt-3"type="submit" value="Save" />

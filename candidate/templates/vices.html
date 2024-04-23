@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div>
+    <h1 class = 'text-center'>Deputy president aspirants</h1>
+</div>    
+
+<div class="container">
+    <div class='row justify-content-center'>
+        {% for vice in vices %}
+        <div class='col'>
+            <div class="card" style="width: 18rem; transition: transform 0.3s, box-shadow 0.3s;">
+                <img class="thumbnail card-img-top" src="{% static 'img/vice.png' %}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ vice.user.first_name }}</h5>
+                    <p class="card-text">{{ vice.about_me }}</p>
+                    <a href="{% url 'vice_detail' vice.id %}" class="btn btn-primary">Know more</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{%endblock%}

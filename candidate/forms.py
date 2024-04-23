@@ -15,3 +15,4 @@ class CreateMangender(forms.ModelForm):
     class Meta:
         model = Mangender
         fields = '__all__'
+        

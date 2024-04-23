@@ -39,9 +39,10 @@ def create_profile(request):
 def edit_profile(request):
     try:
         profile = request.user.profile
+        
     except Profile.DoesNotExist:
         profile = Profile(user=request.user)
-    
+
     if request.method == 'POST':
         form = EditProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
@@ -63,6 +64,8 @@ def create_mangender(request):
         mangender = profile.mangender
     except Mangender.DoesNotExist:
         mangender = Mangender(user=request.user,profile=request.user.profile)
+    if profile.dockets == 'none':
+        return redirect('profile')
     
     if request.method == 'POST':
         form = CreateMangender(request.POST, instance=mangender)
@@ -82,24 +85,37 @@ class CustomAnonymousUser:
 def candidate_profile(request):
     if request.user.is_authenticated:
         user = request.user
+        user_mangender = Mangender.objects.get(user = user)
+        return render(request, 'candidate_profile.html', {'user': user,'user_mangender': user_mangender})                     
     else:
         user = CustomAnonymousUser()
+        return render(request, 'candidate_profile.html',{'user':user})
 
-    return render(request, 'candidate_profile.html', {'user': user})               
-# def candidate_profile(request):
-#     if request.user.is_authenticated():
-#         user = request.user
-#         return render(request,'candidate_profile.html'),{'user': user}
-#     else :
-#         someone = AnonymousUser()
-#         return render(request,'candidate_profile.html',{'someone':someone})    
-#     # profile = get_object_or_404(Profile,pk=request.user.pk)
-#     # return render(request,'candidate_profile.html')
+def presidents_list(request):
+    presidents = Profile.objects.filter(dockets='president')
+    context = {'presidents':presidents}
+    return render(request,'presidents.html',context)
+
+def president_detail(request,id):
+    president = get_object_or_404(Profile.objects.filter(dockets='president',id=id))
+    return render(request,'pres_detail.html',{'president':president})
+
+def vice_list(request):
+    vices= Profile.objects.filter(dockets='vice')
+    context = {'vices':vices}
+    return render(request,'vices.html',context)
+
+def vice_detail(request,id):
+    vice = get_object_or_404(Profile.objects.filter(dockets='vice',id=id))
+    return render(request,'vice_detail.html',{'vice':vice})
+
+def dockets(request):
+    return render(request,'dockets.html')
+# Remember not to use keywords
 
 def create_comment(request):
     return render(request ,'comments.html')
 
-# Remember not to use keywords
 def my_logout(request):
     user = request.user
     if user.is_authenticated:

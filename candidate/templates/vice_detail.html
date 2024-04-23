@@ -9,11 +9,7 @@
             class="rounded-circle img-fluid" style="width: 150px;">
           <h5 class="my-3"></h5>
           <p class="text-muted mb-1">
-            {%if is_authenticated%}
-              Welcome {{user.username}}
-            {%else%}
-              Currently you are {{user.username}}
-            {%endif%}
+              {{vice.user.first_name}} {{vice.user.last_name}}
           </p>
           <p class="text-muted mb-4"></p>
           <div class="d-flex justify-content-center mb-2">
@@ -27,15 +23,11 @@
           <div class="col-m-3">
             <p class="mb-0 display-4">About me</p>
             <hr>
-            <p> {{user.profile.about_me}}</p>   
+            <p> {{vice.about_me}}</p>   
             <hr>
        
           </div>
      
-          
-          <div class='text-center'>
-            <a href ="{% url 'create_profile' %}" class="btn btn-primary">edit</a>
-          </div>
         </div>
       </div>
     </div>
@@ -44,38 +36,25 @@
         <div class="col-m-3">
           <p class="mb-0 display-4">Manifesto</p>
           <hr>
-          {%if user.is_authenticated%}
-          {{user_mangender.manifesto}}
+          <p>{{vice.mangender.manifesto}}</p> 
           <hr>
-          {% else %}
-           <p> It is an aspirational document, a moral compass to ground us in the kinds of leaders we want to be.</p>   
-          <hr>
-          something like if !manifesto then
-          Tell us what you give
-          {%endif%}
+     
         </div>
    
       </div>
       <div class="card mb-4 p-2">
         <div class="col-m-3">
           <p class="mb-0 display-4">Agenda</p>
-          {%if user.is_authenticated%}
           <hr>
-          <p>{{user_mangender.agenda}}</p>
+          <p>{{vice.mangender.agenda}}</p>
           <hr>
-          {%else%}
-          <p>In politics, a political agenda is a list of subjects or problemsto which government officials as well as individuals outside the government are paying serious attention to at any given time</p>
-          <hr>
-          Tell the people what you want to address
-          {%endif%}
-        </div>
-            <div class='text-center'>
-              <a href ='{%url "create_mangender"%}' class = 'btn btn-primary'>edit<a>
-            </div>
+        </div> 
+     
       </div>
-            <div class='text-center'>
-              <a href ='{%url "create_comment"%}' class = 'btn btn-primary'>comment<a>
-            </div>
+      <div class="card mb-4 p-2">
+        <p>What are your views on the candidate</p>
+        <a href = "" class="btn btn-primary">Make a comment</a>
+      </div> 
     </div>
   </div>
 </section>

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .card {
+        transition: transform 0.3s,box-shadow 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    }
+</style>
+<div class="container">
+    <div>
+        <h1 class='text-center'>The Current Candidate Positions</h1>
+    </div>
+    <div class='row justify-content-center'>
+        <div class='col-lg'>
+            <div class=" mb-3 card" style="width: 25rem; padding:25px;">
+                <div class="card-body">
+                    <h5 class="card-title">President seat</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Presidential aspirants</h6>
+                    <p class="card-text">This seat is meant for the president</p>
+                    <a href="{% url 'presidents-list'%}" class="btn btn-primary">Click here to view</a>
+                </div>
+            </div>
+        </div>
+
+        <div class='col'>
+            <div class="mb-3 card" style="width: 25rem; padding:25px; ">
+                <div class="card-body">
+                    <h5 class="card-title">Vice President seat</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Vice presidential aspirants</h6>
+                    <p class="card-text">This seat is meant for the vice president</p>
+                    <a href="{% url 'vice-list'%}" class="btn btn-primary">Click here to view</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
