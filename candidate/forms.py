@@ -16,3 +16,8 @@ class CreateMangender(forms.ModelForm):
         model = Mangender
         fields = '__all__'
         
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = '__all__'
+        

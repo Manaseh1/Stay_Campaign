@@ -20,20 +20,19 @@ from django.contrib.auth.models import AnonymousUser
 def create_profile(request):
     try:
         profile = request.user.profile
-        return redirect(reverse('edit_profile'))  # Redirect to edit_profile if profile exists
+        return redirect(reverse('edit_profile'))
     except Profile.DoesNotExist:
-        pass
+        profile = Profile(user=request.user)
 
-    form = ProfileForm(request.POST,request.FILES or None)
     if request.method == 'POST':
+        form = EditProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
-            return HttpResponse('Successfully saved')
-            # return redirect('profile')
-    return render(request, 'profile_form.html', {'form': form})
+            form.save()
+            return redirect('profile')  # Redirect to the profile page after saving
+    else:
+        form = EditProfileForm(instance=profile)
 
+    return render(request, 'profile_form.html', {'form': form})
 
 @login_required
 def edit_profile(request):
@@ -83,10 +82,26 @@ class CustomAnonymousUser:
         self.username = username
 
 def candidate_profile(request):
+    # if isinstance(request.user, AnonymousUser):
+    #     user= request.user
+    #     return render(request, 'candidate_profile.html',{'user':user})
+    # else:
+    #   
     if request.user.is_authenticated:
+
+        try:
+            docketchecker = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            docketchecker = None
+
         user = request.user
-        user_mangender = Mangender.objects.get(user = user)
-        return render(request, 'candidate_profile.html', {'user': user,'user_mangender': user_mangender})                     
+        if Mangender.DoesNotExist:
+            user_mangender = []
+
+        if Mangender.objects.filter(user=user).exists():
+            user_mangender = Mangender.objects.get(user=user)
+            return render(request, 'candidate_profile.html', {'user': user,'user_mangender': user_mangender})                         
+        return render(request, 'candidate_profile.html', {'user': user,'user_mangender': user_mangender,'docketchecker':docketchecker})                     
     else:
         user = CustomAnonymousUser()
         return render(request, 'candidate_profile.html',{'user':user})
@@ -113,8 +128,25 @@ def dockets(request):
     return render(request,'dockets.html')
 # Remember not to use keywords
 
-def create_comment(request):
-    return render(request ,'comments.html')
+
+def create_comment(request, id):
+    mangenda = get_object_or_404(Mangender, id=id)
+    comments = Comments.objects.filter(mangender = mangenda.id)
+    # profile = Comments.objects.filter(profile = request.user)
+    form = CommentForm(request.POST)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        
+        if form.is_valid():
+      
+            content = request.POST.get('content')
+        
+            comments = Comments.objects.create(mangender = mangenda,name = request.user.username,content= content)
+        return redirect('comments', id=id)
+    else :
+        form = CommentForm(initial={'mangender': mangenda.id,'name':request.user.username,'created_at':timezone.now})
+    context = {'form': form, 'mangenda':mangenda,'comments':comments,'profile':request.user}
+    return render(request, 'comments.html', context)
 
 def my_logout(request):
     user = request.user

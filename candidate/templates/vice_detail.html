@@ -5,16 +5,15 @@
     <div class="col-lg-4">
       <div class="card mb-4">
         <div class="card-body text-center">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-            class="rounded-circle img-fluid" style="width: 150px;">
+          <img src="{{vice.image.url}}" alt="avatar"
+            class= "rounded-circle img-fluid img-thumbnail custom-image-size border border-primary" style="width: 150px; height:150px;">
           <h5 class="my-3"></h5>
           <p class="text-muted mb-1">
-              {{vice.user.first_name}} {{vice.user.last_name}}
+              {{vice.user.first_name}} {{vice.user.last_name}}{{vice.user.username}}
           </p>
           <p class="text-muted mb-4"></p>
           <div class="d-flex justify-content-center mb-2">
-            <button type="button" class="btn btn-primary">Follow</button>
-            <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+            <p> Vying for vice president of the school </p>
           </div>
         </div>
       </div>
@@ -53,7 +52,7 @@
       </div>
       <div class="card mb-4 p-2">
         <p>What are your views on the candidate</p>
-        <a href = "" class="btn btn-primary">Make a comment</a>
+        <a href = "{%url 'comments' vice.mangender.id%}" class="btn btn-primary">Make a comment</a>
       </div> 
     </div>
   </div>

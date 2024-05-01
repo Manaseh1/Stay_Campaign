@@ -11,3 +11,7 @@ class ProfileAdmin(admin.ModelAdmin):
 @admin.register(Mangender)
 class MangenderAdmin(admin.ModelAdmin):
     list_display = ('title',)
+
+@admin.register(Comments)
+class CommentsAdmin(admin.ModelAdmin):
+    list_display = ['name','profile','mangender','content','created_at']
