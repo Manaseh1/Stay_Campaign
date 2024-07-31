@@ -1,0 +1,54 @@
+
+{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Sign up{% endblock %}
+{% block content %}
+{% load widget_tweaks %}
+
+<section class="vh-100">
+	<div class="container-fluid h-custom">
+		<div class="row d-flex justify-content-center align-items-center h-100">
+			<div class="col-md-9 col-lg-6 col-xl-5">
+				<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+					class="img-fluid" alt="Sample image">
+			</div>
+			<div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+				<h1 class="mb-4">Sign up</h1>
+				<form method="POST">
+					{% csrf_token %}
+					{% if messages %}
+						<div class="messages mb-3 col-10">
+							{% for message in messages %}
+								<div style ="list-style-type: none;"{% if message.tags %} class="alert {{ message.tags }} "{% endif %}>{{ message }}</div>
+							{% endfor %}
+						</div>
+					{% endif %}
+					
+					<div class="mb-4">
+						{{ form.first_name|add_class:'form-control' |attr:'placeholder:Name' }}
+					</div>
+					<div class="mb-4">
+						{{ form.username|add_class:'form-control'|attr:'placeholder:Username' }}
+					</div>
+					<div class="mb-4">
+						{{ form.email|add_class:'form-control'|attr:'placeholder:Email address'  }}
+					</div>
+					<div class="mb-4">
+						{{ form.password1|add_class:'form-control'|attr:'placeholder:Password'  }}
+					</div>
+					<div class="mb-4">
+						{{ form.password2|add_class:'form-control'|attr:'placeholder: Confirm password'  }}
+					</div>
+					<div class="text-center text-lg-start mt-4 pt-2">
+						<button type="submit" class="btn btn-primary btn-lg"
+							style="padding-left: 2.5rem; padding-right: 2.5rem;">Sign up</button>
+						<p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="{% url 'login' %}"
+								class="link-danger">Log in</a></p>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</section>
+{% endblock %}

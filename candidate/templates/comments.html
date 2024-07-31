@@ -1,8 +1,8 @@
 {%extends 'base.html'%}
 {% load widget_tweaks static%}
 {%block content%}
-<section class="gradient-custom">
-  <div class="container my-5 py-5">
+<section class="gradient-custom ">
+  <div class="container w-100 my-5 py-5">
     <div class="row d-flex justify-content-center">
       <div class="col-md-12 col-lg-10 col-xl-8">
         <div class="card">
@@ -20,7 +20,11 @@
                     <hr>
                     {{mangenda.agenda}}
                   </div>
-                    <form method="POST" class="w-100">
+                 
+                </div>
+                   <form method="POST" class="w-100 mt-5">
+                    <h4 class=" display-6 mb-4 pb-2">Make your comments here</h4>
+
                     {% csrf_token %}
                     {{form.mangender.as_hidden}}
                     {{form.profile.as_hidden}}
@@ -29,7 +33,6 @@
                     {{form.created_at.as_hidden}} 
                     <button type="submit" class="btn btn-primary mt-2">Submit</button>
                   </form>     
-                </div>
               </div>
           </div>
         </div>
@@ -43,26 +46,24 @@
       <div class="col-md-12 col-lg-10 col-xl-8">
         <div class="card">
           <div class="card-body p-4">
-            <h4 class="text-center mb-4 pb-2">Comments section</h4>
+            <h4 class="text-center  mb-4 pb-2">Comments section</h4>
             <div class="row">
               <div class="col">
                 <div class="d-flex flex-start">
-                  <img class="rounded-circle shadow-1-strong me-3"
+                  <!--img class="rounded-circle shadow-1-strong me-3"
                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="65"
-                    height="65" />
+                    height="65" /-->
                   <div class="flex-grow-1 flex-shrink-1">
                     <div>
                       <div class="d-flex justify-content-between align-items-center">
                         <p class="mb-1">
-                          <span class="small">- Time ->  </span>
+                          <span class="small"> </span>
                         </p>
-                        <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a><br>
                         <!--We could make a comment box appear once this is clicked  -->
                         
                       </div>
                       <p class="small mb-0">
-                        It is a long established fact that a reader will be distracted by
-                        the readable content of a page.
+                      
                       </p>
                     </div>
                      <div class="d-flex flex-start mt-4 reply-form" style="display: none;">
@@ -72,30 +73,7 @@
                  {% comment %} <img src='{{obj.profile.image.url}}'> {% endcomment %}
                 {%endfor%}
                   {%for comment in comments%}
-                  {% comment %} {%if comment.profile == user.profile%}
-                    <div class="d-flex flex-start mt-4 justify-content-end">
-                      <a class="me-3" href="#">
-                          {% if comment.profile.image.url is not None %}
-                              <img class="rounded-circle shadow-1-strong" src="{{ comment.profile.image.url }}" alt="avatar" width="65" height="65" />
-                          {% else %}
-                              <img class="rounded-circle shadow-1-strong" src="{% static '/img/profile1.png' %}" alt="avatar" width="65" height="65" />
-                          {% endif %}
-                     </a>
-                      <div class="flex-grow-1 flex-shrink-1 text-end">
-                          <div>
-                              <div class="d-flex justify-content-between align-items-center">
-                                  <p class="mb-1">
-                                      {{ comment.name }} <span class="small">- {{ comment.created_at }}</span>
-                                  </p>
-                              </div>
-                              <p class="small mb-0">
-                                  {{ comment.content }}
-                              </p>
-                          </div>
-                      </div>
-                  </div>
 
-                  {%endif%} {% endcomment %}
                     <div class="d-flex flex-start mt-4">
                       <a class="me-3" href="#">
                         {%if comment.profile.image.url is not None%}
@@ -121,16 +99,11 @@
                         </div>
                       </div>
                     </div>
+
+
+                
                     {%endfor%}
-                    <div class="d-flex flex-start mt-4">
-                      <a class="me-3" href="#">
-                        <img class="rounded-circle shadow-1-strong"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
-                          width="65" height="65" />
-                      </a>
-                      <div class="flex-grow-1 flex-shrink-1">
-                                             </div>
-                    </div>
+                    
                   </div>
                 </div>
 

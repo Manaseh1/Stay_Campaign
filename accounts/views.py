@@ -44,7 +44,7 @@ def signin(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    messages.success(request,'Authenticated successfully')
+                    # messages.success(request,'Authenticated successfully')
                     return redirect(reverse('profile'))
                 else:
                     messages.info(request,'Disabled account')

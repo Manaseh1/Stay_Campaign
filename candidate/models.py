@@ -11,7 +11,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User,on_delete = models.CASCADE,null=True)
     about_me = models.TextField(blank = True)
     dockets = models.CharField(max_length=10,choices =Dockets.choices,default = Dockets.none)
-    image = models.ImageField(blank = True,null = True)
+    image = models.ImageField(blank = True,null = True,default='static img/profile1.png')
     # docket = models.CharField(max_length =100)
     def __str__(self):
         return self.user.username

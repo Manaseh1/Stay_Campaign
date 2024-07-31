@@ -16,7 +16,8 @@ from django.contrib.auth.models import AnonymousUser
 
 # Create a Profile instance for the user
 
-@login_required
+
+@login_required(login_url='login')
 def create_profile(request):
     try:
         profile = request.user.profile
@@ -34,7 +35,7 @@ def create_profile(request):
 
     return render(request, 'profile_form.html', {'form': form})
 
-@login_required
+@login_required(login_url='login')
 def edit_profile(request):
     try:
         profile = request.user.profile
@@ -51,7 +52,9 @@ def edit_profile(request):
         form = EditProfileForm(instance=profile)
 
     return render(request, 'edit_profile.html', {'form': form})
-@login_required
+
+
+@login_required(login_url='login')
 def create_mangender(request):
     try:
         profile = request.user.profile
@@ -79,14 +82,12 @@ def create_mangender(request):
 
 class CustomAnonymousUser:
     def __init__(self, username='AnonymousUser'):
+        
         self.username = username
+        self.profile = None
+        # self.comment = Comments(name = self.name,profile = self.profile)
 
 def candidate_profile(request):
-    # if isinstance(request.user, AnonymousUser):
-    #     user= request.user
-    #     return render(request, 'candidate_profile.html',{'user':user})
-    # else:
-    #   
     if request.user.is_authenticated:
 
         try:
@@ -131,21 +132,20 @@ def dockets(request):
 
 def create_comment(request, id):
     mangenda = get_object_or_404(Mangender, id=id)
-    comments = Comments.objects.filter(mangender = mangenda.id)
-    # profile = Comments.objects.filter(profile = request.user)
-    form = CommentForm(request.POST)
+    comments = Comments.objects.filter(mangender=mangenda.id)
+    form = CommentForm(request.POST or None)
+
     if request.method == "POST":
-        form = CommentForm(request.POST)
-        
         if form.is_valid():
-      
-            content = request.POST.get('content')
-        
-            comments = Comments.objects.create(mangender = mangenda,name = request.user.username,content= content)
-        return redirect('comments', id=id)
-    else :
-        form = CommentForm(initial={'mangender': mangenda.id,'name':request.user.username,'created_at':timezone.now})
-    context = {'form': form, 'mangenda':mangenda,'comments':comments,'profile':request.user}
+            content = form.cleaned_data['content']
+            username = request.user.username if request.user.is_authenticated else 'AnonymousUser'
+            Comments.objects.create(mangender=mangenda, name=username, content=content)
+            return redirect('comments', id=id)
+    else:
+        initial_data = {'mangender': mangenda.id, 'name': request.user.username if request.user.is_authenticated else 'AnonymousUser', 'created_at': timezone.now}
+        form = CommentForm(initial=initial_data)
+
+    context = {'form': form, 'mangenda': mangenda, 'comments': comments, 'profile': request.user}
     return render(request, 'comments.html', context)
 
 def my_logout(request):

@@ -50,10 +50,18 @@
         </div> 
      
       </div>
+         {% if not vice.mangender.id %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        No mangender found for this candidate.
+        <a href="{%url 'dockets'%}" ><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></a>
+    </div>
+    {%else%}
       <div class="card mb-4 p-2">
         <p>What are your views on the candidate</p>
         <a href = "{%url 'comments' vice.mangender.id%}" class="btn btn-primary">Make a comment</a>
       </div> 
+   
+    {% endif %}
     </div>
   </div>
 </section>

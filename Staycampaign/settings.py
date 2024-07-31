@@ -37,10 +37,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 
 INSTALLED_APPS = [
+    # 'channels',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,7 +53,16 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'accounts.apps.AccountsConfig',
     'candidate.apps.CandidateConfig',
+    'chat',
 ]
+
+# ASGI_APPLICATION = 'Staycampaign.routing.application'
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels.layers.InMemoryChannelLayer',
+#     },
+# }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

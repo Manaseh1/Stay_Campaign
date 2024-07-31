@@ -7,51 +7,58 @@
     height: 150px;
 }
 </style>
-<section style="background-color: #eee;" class='p-4'>
+<section style="background-color: #eee; height=100%;" class='p-4'>
   <div class="row">
     <div class="col-lg-4">
       <div class="card mb-2">
-        <div class="card-body text-center">
-          <div>
-           {%if user.profile.image.url is not None%} 
-          <img src="{{user.profile.image.url}}" alt="avatar"
-            class="rounded-circle img-fluid img-thumbnail custom-image-size border border-primary" style="width: 150px;">
-          {%else%}
-          <img src="{%static '/img/profile1.png' %}" alt="avatar"
-            class="rounded-circle img-fluid img-thumbnail custom-image-size border border">
-          {%endif%}  
-          </div> 
-          <h5 class="my-3"></h5>
-          <p class="text-muted mb-1">
-            {%if user.is_authenticated%}
-              Welcome {{user.username}}
-            {%else%}
-              Currently you are {{user.username}}
-            {%endif%}
-          </p>
-          <p class="text-muted mb-4"></p>
-          <div class="d-flex justify-content-center mb-2">
-            <a href = '{%url "create_profile"%}'type="button" class="btn btn-primary">Edit Profile</a>
+          <div class="card-body text-center">
+            <div>
+            
+            {% if user.profile.image %}
+            <img src="{{ user.profile.image.url }}" alt="avatar" class="rounded-circle img-fluid img-thumbnail custom-image-size border border-primary" style="width: 150px;">
+            {% else %}
+            <img src="{% static 'img/profile1.png' %}" alt="avatar" class="rounded-circle img-fluid img-thumbnail custom-image-size border border">
+            {% endif %}
+            </div> 
+            <h5 class="my-3"></h5>
+            <p class="text-muted mb-1">
+              {%if user.is_authenticated%}
+                Welcome {{user.username}}
+              {%else%}
+                Currently you are {{user.username}}
+              {%endif%}
+            </p>
+            <p class="text-muted mb-4"></p>
+            <div class="d-flex justify-content-center mb-2">
+              <a href = '{%url "create_profile"%}'type="button" class="btn btn-primary">Edit Profile</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card mb-4 mb-lg-0">
-        <div class="card-body p-2 mb-2">
-          <div class="col-m-3">
-            <p class="mb-0 display-4">About me</p>
-            <hr>
-            <p> {{user.profile.about_me}}</p>   
-            <hr>
-       
-          </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-2 mb-2">
+            <div class="col-m-3">
+               {%if user.is_authenticated%}
+              <p class="mb-0 display-4">About me</p>
+              <hr>
+              
+              <p> {{user.profile.about_me}}</p>   
+              <hr>    
+              {%else%}
+               {% comment %} <p class="mb-0 display-4"></p>
+              <hr>
+              <p> You may choose to signup and login </p>   
+              <hr>  {% endcomment %}
+              {%endif%}   
+        </div>
+        
      
           
           <!--div class='text-center'>
             <a href ="{% url 'create_profile' %}" class="btn btn-primary">edit</a>
           </div-->
-        </div>
       </div>
     </div>
+  </div>
 {% comment %} {% for obj in docketchecker.dockets%}
 {{ obj }}
 {% endfor %} {% endcomment %}
